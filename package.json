@@ -1,0 +1,23 @@
+{
+  "name": "pull-notify",
+  "description": "",
+  "version": "0.0.0",
+  "homepage": "https://github.com/dominictarr/pull-notify",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dominictarr/pull-notify.git"
+  },
+  "dependencies": {
+    "pull-pushable": "~1.1.4"
+  },
+  "devDependencies": {
+    "tape": "~4.0.0",
+    "pull-stream": "~2.27.0"
+  },
+  "scripts": {
+    "prepublish": "npm ls &&  npm test",
+    "test": "set -e; for t in test/*.js; do node $t; done"
+  },
+  "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://dominictarr.com)",
+  "license": "MIT"
+}
