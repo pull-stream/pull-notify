@@ -7,6 +7,7 @@ module.exports = function () {
 
   function notify (msg) {
     for(var k in listeners) listeners[k].push(msg)
+    return msg
   }
 
   notify.listen = function () {
