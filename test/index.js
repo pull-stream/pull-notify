@@ -70,7 +70,7 @@ tape('simple', function (t) {
     })
   )
 
-  notify(r)
+  t.equal(notify(r), r)
   notify.end()
 })
 
