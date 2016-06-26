@@ -4,8 +4,8 @@ var tape = require('tape')
 var pull = require('pull-stream')
 
 tape('simple', function (t) {
-
-  var notify = Notify(), r = Math.random()
+  var notify = Notify()
+  var r = Math.random()
 
   pull(
     notify.listen(),
@@ -20,17 +20,17 @@ tape('simple', function (t) {
   notify.end()
 })
 
-
 tape('end', function (t) {
-
-  var notify = Notify(), r = Math.random(), n = 3
+  var notify = Notify()
+  var r = Math.random()
+  var n = 3
 
   pull(
     notify.listen(),
     pull.drain(function (data) {
       t.equal(data, r)
     }, function () {
-      if(--n) return
+      if (--n) return
       t.end()
     })
   )
@@ -39,7 +39,7 @@ tape('end', function (t) {
     pull.drain(function (data) {
       t.equal(data, r)
     }, function () {
-      if(--n) return
+      if (--n) return
       t.end()
     })
   )
@@ -48,7 +48,7 @@ tape('end', function (t) {
     pull.drain(function (data) {
       t.equal(data, r)
     }, function () {
-      if(--n) return
+      if (--n) return
       t.end()
     })
   )
@@ -58,8 +58,8 @@ tape('end', function (t) {
 })
 
 tape('simple', function (t) {
-
-  var notify = Notify(), r = Math.random()
+  var notify = Notify()
+  var r = Math.random()
 
   pull(
     notify.listen(),
@@ -73,5 +73,3 @@ tape('simple', function (t) {
   t.equal(notify(r), r)
   notify.end()
 })
-
-
