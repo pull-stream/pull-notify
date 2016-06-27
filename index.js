@@ -25,7 +25,9 @@ module.exports = function () {
 
   notify.abort = function (err) {
     // abort by ending all listeners
-    while (listeners.length) listeners[0].end(err)
+    for (var i = 0, len = listeners.length; i < len; i++) {
+      listeners[0].end(err)
+    }
   }
 
   notify.end = function () {
