@@ -16,7 +16,7 @@ tape('simple', function (t) {
     })
   )
 
-  notify(r)
+  t.equal(notify(r), r)
   notify.end()
 })
 
@@ -49,23 +49,6 @@ tape('end', function (t) {
       t.equal(data, r)
     }, function () {
       if (--n) return
-      t.end()
-    })
-  )
-
-  notify(r)
-  notify.end()
-})
-
-tape('simple', function (t) {
-  var notify = Notify()
-  var r = Math.random()
-
-  pull(
-    notify.listen(),
-    pull.drain(function (data) {
-      t.equal(data, r)
-    }, function () {
       t.end()
     })
   )
