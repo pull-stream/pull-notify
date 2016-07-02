@@ -19,7 +19,7 @@ var notify = Notify()
 
 //create a pull stream that listens on events.
 //it will eventually get all events.
-pull(notify.listen(), pull.drain(console.log))
+pull(notify.listen(), pull.drain((evt) => console.log(evt)))
 
 notify('hello') //emit an event.
 
