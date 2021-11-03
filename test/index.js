@@ -56,3 +56,22 @@ tape('end', function (t) {
   t.equal(notify(r), r)
   notify.end()
 })
+
+tape('end immediately upon delivery', function (t) {
+  var notify = Notify()
+  var r = Math.random()
+  var n = 1
+
+  pull(
+    notify.listen(),
+    pull.drain(function (data) {
+      t.equal(data, r)
+      notify.end()
+    }, function () {
+      if (--n) return
+      t.end()
+    })
+  )
+
+  t.equal(notify(r), r)
+})
