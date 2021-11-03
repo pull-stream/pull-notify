@@ -3,10 +3,12 @@ var pushable = require('pull-pushable')
 
 module.exports = function () {
   var listeners = []
+  var closed = false
 
   function notify (message) {
     // notify by pushing to all listeners
     for (var i = 0; i < listeners.length; i++) {
+      if (closed) return message
       listeners[i].push(message)
     }
     return message
@@ -14,18 +16,15 @@ module.exports = function () {
 
   notify.listen = function () {
     // create listener with `onClose` handler
-    var listener = pushable(function onClose () {
-      // if listener is found, delete from list
-      var index = listeners.indexOf(listener)
-      if (index !== -1) listeners.splice(index, 1)
-    })
+    var listener = pushable()
     listeners.push(listener)
     return listener
   }
 
   notify.abort = function (err) {
     // abort by ending all listeners
-    while (listeners.length) listeners[0].end(err)
+    closed = true
+    while (listeners.length) listeners.shift().end(err)
   }
 
   notify.end = function () {
